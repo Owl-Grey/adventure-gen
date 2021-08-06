@@ -1,0 +1,109 @@
+
+
+<Container>:
+    # alls:alls
+    # name:name
+    # temp:temp
+    # ct:ct
+    # pw:pw
+    # itl:itl
+    # ag:ag
+    # aug: aug
+    # char:char
+    # weap:weap
+    # wear:wear
+    do_default_tab: False
+    tab_width:537
+    TabbedPanelItem:
+        text: 'Оружие'
+        GridLayout:
+            cols:1
+            ScrollView:
+                size: self.size
+                do_scroll_x: False
+                do_scroll_y: True
+                GridLayout:
+                    id:guns
+                    cols:1
+                    padding:20
+                    size_hint_y: None
+                    row_default_height: '170px'
+                    height: self.minimum_height
+            GridLayout:
+                rows:1
+                size_hint: 1,0.2
+                padding: 20
+                Button:
+                    text: "Сгенерировать"
+                    on_release:
+                        root.getgun()
+
+    TabbedPanelItem:
+        text: 'Шмот'
+        GridLayout:
+            cols:1
+            ScrollView:
+                size: self.size
+                do_scroll_x: False
+                do_scroll_y: True
+                GridLayout:
+                    id:chmot
+                    cols:1
+                    padding:20
+                    size_hint_y: None
+                    row_default_height: '170px'
+                    height: self.minimum_height
+            GridLayout:
+                rows:1
+                size_hint: 1,0.2
+                padding: 20
+                Button:
+                    text: "Сгенерировать"
+                    on_release:
+                        root.getchmot()
+
+
+<Pop@Popup>
+    list:list
+    GridLayout:
+        rows:7
+        ScrollView:
+            size: self.size
+            do_scroll_x: False
+            do_scroll_y: True
+            Label:
+                size_hint_y: None
+                height: self.texture_size[1]
+                text_size: self.width, None
+                padding: 10, 10
+                id:list
+                text:""
+        GridLayout:
+            padding:10
+            rows:1
+            size_hint: 1,0.1
+            Button:
+                text: 'Закрыть'
+                on_press: root.dismiss()
+<PopChmot@Popup>
+    list:list
+    GridLayout:
+        rows:7
+        ScrollView:
+            size: self.size
+            do_scroll_x: False
+            do_scroll_y: True
+            Label:
+                size_hint_y: None
+                height: self.texture_size[1]
+                text_size: self.width, None
+                padding: 10, 10
+                id:list
+                text:""
+        GridLayout:
+            padding:10
+            rows:1
+            size_hint: 1,0.1
+            Button:
+                text: 'Закрыть'
+                on_press: root.dismiss()
