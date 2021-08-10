@@ -45,6 +45,7 @@ guns=[]
 mel=[]
 weap=[[],[],[],[],[],[],[],[],[],[],[],[]]
 equip=[[],[]]
+ctpoints=[]
 
 class Pop(Popup):
     title = StringProperty()
@@ -101,294 +102,32 @@ class Pop(Popup):
                 strx+=str(k)+". "+j+"\n"
             self.list.text=str(strx)
 
+class PopDstr(Popup):
+    title = StringProperty()
+
+    def __init__(self, title, **kwargs):
+        super(PopDstr, self).__init__(**kwargs)
+        self.set_description(title)
+
+    def set_description(self, title):
+        i=int(title)
+        self.title = "Район"
+        strx=""
+        k=0
+        for j in ctpoints[i]:
+            k=k+1
+            strx+=str(k)+". "+j+"\n"
+        self.list.text=str(strx)
 
 
-
-############################################
-# class InsPanel(TabbedPanel):
-#
-#     def clk(self,instance_toggle_button):
-#         instance_toggle_button.state="normal"
-#         popup = Pop(str(instance_toggle_button.group))
-#         popup.open()
-#     def chp(self):
-#         x=random()
-#         y=random()
-#         z=random()
-#         pw=x/(x+y+z)*15
-#         itl=y/(x+y+z)*15
-#         ag=z/(x+y+z)*15
-#         pw=round(pw)+1
-#         itl=round(itl)+1
-#         ag=round(ag)+1
-#         return pw, itl, ag
-#     def try_a(self,a,b,c):
-#         if a>b:
-#             if a>c:
-#                 return 1
-#             else:
-#                 return 3
-#         elif b>c:
-#             return 2
-#         elif c>b and c>a:
-#             return 3
-#         else:
-#             return 2
-#     def navs(self,hr):
-#         nav=""
-#         if hr<3:
-#             x=randint(1,2)
-#             cold=x
-#             x=randint(1,2)
-#             gun=x
-#             x=randint(1,2)
-#             hand=x
-#             l=self.try_a(cold,gun,hand)
-#             if l==1:
-#                 m=randint(0,len(mel)-1)
-#                 weap=str(mel[m])
-#             elif l==2:
-#                 m=randint(0,len(guns)-1)
-#                 weap=str(guns[m])
-#             elif l==3:
-#                 weap="Кастет "+str(choice(["Плохой: 1d8*2","Хороший: 1d10*2","Отличный: 1d12*2"])) + str(randint(1,20))
-#         elif hr==3:
-#             x=randint(1,3)
-#             cold=x
-#             x=randint(1,3)
-#             gun=x
-#             x=randint(1,3)
-#             hand=x
-#             l=self.try_a(cold,gun,hand)
-#             if l==1:
-#                 m=randint(0,len(mel)-1)
-#                 weap=str(mel[m])
-#             elif l==2:
-#                 m=randint(0,len(guns)-1)
-#                 weap=str(guns[m])
-#             elif l==3:
-#                 weap="Кастет "+str(choice(["Плохой: 1d8*2","Хороший: 1d10*2","Отличный: 1d12*2"])) + str(randint(10,30))
-#         elif hr>3 and hr<6:
-#             x=randint(1,5)
-#             cold=x
-#             x=randint(1,5)
-#             gun=x
-#             x=randint(1,5)
-#             hand=x
-#             l=self.try_a(cold,gun,hand)
-#             if l==1:
-#                 m=randint(0,len(mel)-1)
-#                 weap=str(mel[m])
-#             elif l==2:
-#                 m=randint(0,len(guns)-1)
-#                 weap=str(guns[m])
-#             elif l==3:
-#                 weap="Кастет "+str(choice(["Плохой: 1d8*2","Хороший: 1d10*2","Отличный: 1d12*2"])) + str(randint(10,30))
-#         elif hr==6:
-#             x=randint(3,5)
-#             cold=x
-#             x=randint(3,5)
-#             gun=x
-#             x=randint(3,5)
-#             hand=x
-#             l=self.try_a(cold,gun,hand)
-#             if l==1:
-#                 m=randint(0,len(mel)-1)
-#                 weap=str(mel[m])+"+"+str(randint(10,30))
-#             elif l==2:
-#                 m=randint(0,len(guns)-1)
-#                 weap=str(guns[m])+"+"+str(randint(10,30))
-#             elif l==3:
-#                 weap="Кастет "+str(choice(["Плохой: 1d8*2","Хороший: 1d10*2","Отличный: 1d12*2"])) + str(randint(10,30))
-#         return cold, gun, hand, weap
-#     def aug(self,hr):
-#         augp=""
-#         if hr<3:
-#             numb=randint(0,1)
-#         elif hr==3:
-#             numb=randint(1,2)
-#         elif hr>3 and hr<6:
-#             numb=randint(2,4)
-#         elif hr==6:
-#             numb=randint(6,7)
-#         if numb == 0:
-#             augp+="Не найдены"
-#         else:
-#
-#             for i in range(numb):
-#                 part=randint(0, len(aug)-1)
-#                 if part == 0:
-#                     name = "\n   Руки: "
-#                 elif part == 1:
-#                     name="\n   Голова: "
-#                 elif part == 2:
-#                     name="\n   Ноги: "
-#                 elif part == 3:
-#                     name="\n   Тело: "
-#                 aug_i=randint(0, len(aug[part])-1)
-#                 augp+= str(name) + str(aug[part][aug_i])
-#         return augp
-#     def ez(self):
-#         numb=randint(1,2)
-#         for i in range(numb):
-#             pr=[]
-#             ch=self.chp()
-#             nav=self.navs(1)
-#             augp=self.aug(1)
-#             mn=wear[randint(1,len(wear)-1)]
-#             pr.append(ch)
-#             pr.append(nav)
-#             pr.append(augp)
-#             pr.append(mn)
-#             pr_arr.append(pr)
-#             self.ids.grd1.add_widget(
-#                 ToggleButton(
-#                     text=f'Противник {i+1}',
-#                     group=i,
-#                     on_press=self.clk,
-#                     size_hint_y=None,
-#                     height=150,
-#                     state='normal'
-#                 )
-#             )
-#     def light(self):
-#         numb=randint(1,3)
-#         for i in range(numb):
-#             pr=[]
-#             ch=self.chp()
-#             nav=self.navs(2)
-#             augp=self.aug(2)
-#             mn=wear[randint(1,len(wear)-1)]
-#             pr.append(ch)
-#             pr.append(nav)
-#             pr.append(augp)
-#             pr.append(mn)
-#             pr_arr.append(pr)
-#             self.ids.grd1.add_widget(
-#                 ToggleButton(
-#                     text=f'Противник {i+1}',
-#                     group=i,
-#                     on_press=self.clk,
-#                     size_hint_y=None,
-#                     height=150,
-#                     state='normal'
-#                 )
-#             )
-#     def norm(self):
-#         numb=randint(1,4)
-#         for i in range(numb):
-#             pr=[]
-#             ch=self.chp()
-#             nav=self.navs(3)
-#             augp=self.aug(3)
-#             mn=wear[randint(1,len(wear)-1)]
-#             pr.append(ch)
-#             pr.append(nav)
-#             pr.append(augp)
-#             pr.append(mn)
-#             pr_arr.append(pr)
-#             self.ids.grd1.add_widget(
-#                 ToggleButton(
-#                     text=f'Противник {i+1}',
-#                     group=i,
-#                     on_press=self.clk,
-#                     size_hint_y=None,
-#                     height=150,
-#                     state='normal'
-#                 )
-#             )
-#     def hard(self):
-#         numb=randint(1,4)
-#         for i in range(numb):
-#             pr=[]
-#             ch=self.chp()
-#             nav=self.navs(4)
-#             augp=self.aug(4)
-#             mn=wear[randint(1,len(wear)-1)]
-#             pr.append(ch)
-#             pr.append(nav)
-#             pr.append(augp)
-#             pr.append(mn)
-#             pr_arr.append(pr)
-#             self.ids.grd1.add_widget(
-#                 ToggleButton(
-#                     text=f'Противник {i+1}',
-#                     group=i,
-#                     on_press=self.clk,
-#                     size_hint_y=None,
-#                     height=150,
-#                     state='normal'
-#                 )
-#             )
-#     def imp(self):
-#         numb=randint(1,5)
-#         for i in range(numb):
-#             pr=[]
-#             ch=self.chp()
-#             nav=self.navs(5)
-#             augp=self.aug(5)
-#             mn=wear[randint(1,len(wear)-1)]
-#             pr.append(ch)
-#             pr.append(nav)
-#             pr.append(augp)
-#             pr.append(mn)
-#             pr_arr.append(pr)
-#             self.ids.grd1.add_widget(
-#                 ToggleButton(
-#                     text=f'Противник {i+1}',
-#                     group=i,
-#                     on_press=self.clk,
-#                     size_hint_y=None,
-#                     height=150,
-#                     state='normal'
-#                 )
-#             )
-#     def boss(self):
-#         self.ids.bs.clear_widgets()
-#         pr_arr.clear()
-#         numb=1
-#         for i in range(numb):
-#             pr=[]
-#             ch=self.chp()
-#             nav=self.navs(6)
-#             augp=self.aug(6)
-#             name=pril[randint(1,len(pril)-1)]
-#             mn=wear[randint(1,len(wear)-1)]
-#             pr.append(ch)
-#             pr.append(nav)
-#             pr.append(augp)
-#             pr.append(mn)
-#             pr.append(name)
-#             pr_arr.append(pr)
-#             print(pr_arr)
-#             self.ids.bs.add_widget(
-#                 ToggleButton(
-#                     text=f'Босс',
-#                     group=i,
-#                     on_press=self.clk,
-#                     size_hint_y=None,
-#                     height=150,
-#                     state='normal'
-#                 )
-#             )
-#     def genp(self, l):
-#         self.ids.grd1.clear_widgets()
-#         pr_arr.clear()
-#         if l==1:
-#             self.ez()
-#         elif l==2:
-#             self.light()
-#         elif l==3:
-#             self.norm()
-#         elif l==4:
-#             self.hard()
-#         elif l==5:
-#             self.imp()
-###########################################
 class Container(TabbedPanel):
     def clk(self,instance_toggle_button):
         instance_toggle_button.state="normal"
         popup = Pop(str(instance_toggle_button.group))
+        popup.open()
+    def clkrn(self,instance_toggle_button):
+        instance_toggle_button.state="normal"
+        popup = PopDstr(str(instance_toggle_button.group))
         popup.open()
     def get_guns(self, *args):
         ch=''
@@ -669,23 +408,18 @@ class Container(TabbedPanel):
                 l= colors[z] + " " + pril_armor[y] + " " + j + "\nот " + str(gun_corps[x])
                 arm.append(l)
                 equip[1].append(l)
-
-
     def getchmot(self, *args):
         self.ids.chmot.clear_widgets()
         for i in range(2):
             equip[i].clear()
         self.get_chmot()
         self.get_armor()
-
     def getgun(self, *args):
         self.ids.guns.clear_widgets()
         for i in range(12):
             weap[i].clear()
         self.get_guns()
         self.get_mellee()
-
-
     def rand_character(self):
         numb=randint(2,4)
         for i in range(numb):
@@ -760,6 +494,158 @@ class Container(TabbedPanel):
         self.rand_all_navs()
         self.rand_guns()
         self.rand_wear()
+
+
+    def randct(self,l):
+        self.ids.dstr.clear_widgets()
+        distr=["Жилой", "Рыночный","Промышленный","Корпоративный","Парковый","Заброшенный","Спальное гетто"]
+        spec=["Промышленность","Шахтерство","Торговля","Бандитизм","Сельское хозяйство"]
+        mine=["уголь","редкоземельные металлы","драгоценные металлы","железо","нефть и газ","камень (я не дам)"]
+        gang=["наркоторговля","работорговля","рэкет","воровство","убийства","анархизм"]
+        prom=["оружие","одежда","аугментации","автомобили","энергетика","топливо"]
+        points=["Черный рынок","Отель","Дата центр","Жилой дом","Продуктовый магазин","Шоссе","Закусочная","Полицейский участок","Школа","Колледж","Здание правительства","Парковка","Офисное здание","Метро","Больница","Поликлиника","Супермаркет","Магазин аугментаций","Медиа служба","Завод","Автосалон","Аркадный зал","Спорт зал","Ночной клуб","Подземный переход","Подпольная клиника","Бар","Ресторан","Кофейня","Таксопарк","Кинотеатр","Антикварный магазин","Заправка","Компьютерный зал","Гидропонная ферма","Гараж","Дедов подвал","Заброшенное здание","Лаборатория","Аптека","Магазин электроники","Картинная галерея","Автосервис","Ремонт роботов","Промышленный склад","Юридическая фирма","Церковь","Магазин оружия","Магазин брони"]
+        listl=[]
+        strl=""
+        dstr=""
+        k=0
+        if l == 1:
+            rez=""
+            ctpoints.clear()
+            listl.clear()
+            specs=choice(spec)
+            if specs =="Промышленность":
+                listl.append("Промышленный")
+                rez=". \nОсновой производства является " + str(choice(prom))
+            elif specs =="Шахтерство":
+                rez=". \nНа небольшом отдалении располагается небольшая шахта, добывающая " + str(choice(mine))
+            elif specs =="Торговля":
+                rez=". \nВ центре располагается небольшой рынок. На этом рынке вы сможете купить некоторые припасы, которые могут пригодиться в дальнешем."
+                listl.append("Рыночный")
+            elif specs =="Бандитизм":
+                rez=". \nОсновной деятельностью является " + str(choice(gang))
+                listl.append("Спальное гетто")
+            elif specs =="Сельское хозяйство":
+                rez=". \nВокруг раскинулись поля с различными культурами"
+            kr = randint(1,3)
+            for i in range(kr):
+                ret=choice(distr)
+                listl.append(ret)
+            strl="Это маленький город. " + str(choice(["Богатый. ","Бедный. ","Среднего уровня. "]))
+            strl+="С населением, приблизительно " + str(randint(5,90)) + " тысяч человек. "
+            strl+="\nСпециализация города: " + str(specs) + str(rez) +"." + "\nВсего в городе " + str(len(set(listl))) + " районов:\n"
+            ir=0
+            for i in set(listl):
+                ir+=1
+                mn = randint(1,3)
+                arr=[]
+                for jk in range(mn):
+                    arr.append(choice(points))
+                ctpoints.append(set(arr))
+                self.ids.dstr.add_widget(
+                    ToggleButton(
+                        text=i,
+                        group=ir-1,
+                        on_press=self.clkrn,
+                        size_hint_y=None,
+                        height=150,
+                        state='normal'
+                    ))
+            self.ct.text = strl
+        elif l == 2:
+            rez=""
+            ctpoints.clear()
+            listl.clear()
+            specs=choice(spec)
+            if specs =="Промышленность":
+                listl.append("Промышленный")
+                rez=". \nОсновой производства является " + str(choice(prom))
+            elif specs =="Шахтерство":
+                rez=". \nНа небольшом отдалении располагается несколько шахт, добывающих " + str(choice(mine))
+            elif specs =="Торговля":
+                rez=". \nВ центре располагается большой рынок. На этом рынке вы сможете купить большую часть всех необходимых вам предметов"
+                listl.append("Рыночный")
+            elif specs =="Бандитизм":
+                rez=". \nОсновной деятельностью является " + str(choice(gang))
+                listl.append("Спальное гетто")
+            elif specs =="Сельское хозяйство":
+                m=randint(0,2)
+                if m!=0:
+                    rez=". \nНа небольшом отдалении располагаются " + str(m) + " деревни. Вокруг раскинулись поля с различными культурами и нескольними одинокостоящими фермами"
+                else:
+                    rez=""
+            kr = randint(2,4)
+            for i in range(kr):
+                ret=choice(distr)
+                listl.append(ret)
+            strl="Это не очень крупный город. " + str(choice(["Богатый. ","Бедный. ","Среднего уровня. "]))
+            x=""
+            x=str(choice(["На севере протекает река","На юге протекает река","На востоке протекает река","На западе протекает река",""]))
+            if x!="":
+                x+=str(choice([".",", которая делит город на две части.",]))
+            strl+="С населением, приблизительно " + str(randint(90,200)) + " тысяч человек. " + x
+            strl+="\nСпециализация города: " + str(specs) + str(rez) +"." + "\nВсего в городе " + str(len(set(listl))) + " районов:\n"
+            ir=0
+            for i in set(listl):
+                ir+=1
+                mn = randint(3,5)
+                arr=[]
+                for jk in range(mn):
+                    arr.append(choice(points))
+                ctpoints.append(set(arr))
+                self.ids.dstr.add_widget(
+                    ToggleButton(
+                        text=i,
+                        group=ir-1,
+                        on_press=self.clkrn,
+                        size_hint_y=None,
+                        height=150,
+                        state='normal'
+                    ))
+            self.ct.text = strl
+        elif l == 3:
+            rez=""
+            ctpoints.clear()
+            listl.clear()
+            specs=choice(spec)
+            if specs =="Промышленность":
+                listl.append("Промышленный")
+                rez=". \nОсновой производства является " + str(choice(prom))
+            elif specs =="Шахтерство":
+                rez=". \nНа небольшом отдалении располагается несколько шахт, добывающих " + str(choice(mine))
+            elif specs =="Торговля":
+                rez=". \nВ центре располагается большой рынок. На этом рынке вы сможете купить все что угодно"
+                listl.append("Рыночный")
+            elif specs =="Бандитизм":
+                rez=". \nОсновной деятельностью является " + str(choice(gang))
+                listl.append("Спальное гетто")
+            elif specs =="Сельское хозяйство":
+                m=randint(2,4)
+                rez=". \nНа небольшом отдалении располагаются " + str(m) + " деревни. Вокруг раскинулись поля с различными культурами и множество ферм"
+            kr = randint(5,7)
+            for i in range(kr):
+                ret=choice(distr)
+                listl.append(ret)
+            strl="Это большой город. " + str(choice(["Богатый. ","Бедный. ","Среднего уровня. "]))
+            strl+="С населением, приблизительно " + str(randint(200,900)) + " тысяч человек. " + str(choice(["На севере протекает река","На юге протекает река","На востоке протекает река","На западе протекает река"])) + str(choice([".",", которая делит город на две части.",", которая делит город на три части."]))
+            strl+="\nСпециализация города: " + str(specs) + str(rez) +"." + "\nВсего в городе " + str(len(set(listl))) + " районов:\n"
+            ir=0
+            for i in set(listl):
+                ir+=1
+                mn = randint(3,6)
+                arr=[]
+                for jk in range(mn):
+                    arr.append(choice(points))
+                ctpoints.append(set(arr))
+                self.ids.dstr.add_widget(
+                    ToggleButton(
+                        text=i,
+                        group=ir-1,
+                        on_press=self.clkrn,
+                        size_hint_y=None,
+                        height=150,
+                        state='normal'
+                    ))
+            self.ct.text = strl
 ############################################
 class MyApp(App):
     def build(self):

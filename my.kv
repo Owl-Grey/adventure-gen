@@ -1,19 +1,9 @@
 
 
 <Container>:
-    # alls:alls
-    # name:name
-    # temp:temp
-    # ct:ct
-    # pw:pw
-    # itl:itl
-    # ag:ag
-    # aug: aug
-    # char:char
-    # weap:weap
-    # wear:wear
+    ct:ct
     do_default_tab: False
-    tab_width:537
+    tab_width:357
     TabbedPanelItem:
         text: 'Оружие'
         GridLayout:
@@ -61,6 +51,56 @@
                     text: "Сгенерировать"
                     on_release:
                         root.getchmot()
+    TabbedPanelItem:
+        text: 'Города'
+        GridLayout:
+            rows:3
+            Label:
+                text:"Выберите размер города"
+                size_hint: 1,0.1
+            GridLayout:
+                cols:3
+                padding: 20
+                size_hint: 1,0.2
+                Button:
+                    text: "Маленький"
+                    on_release:
+                        root.randct(1)
+                Button:
+                    text: "Средний"
+                    on_release:
+                        root.randct(2)
+                Button:
+                    text: "Большой"
+                    on_release:
+                        root.randct(3)
+            GridLayout:
+                cols:1
+                ScrollView:
+                    size: self.size
+                    do_scroll_x: False
+                    do_scroll_y: True
+                    GridLayout:
+                        cols:1
+                        padding:20
+                        size_hint_y: None
+                        row_default_height: '170px'
+                        height: self.minimum_height
+                        Label:
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            text_size: self.width, None
+                            padding: 20, 20
+                            id:ct
+                            text:""
+                        GridLayout:
+                            id:dstr
+                            cols:2
+                            size_hint_y: None
+                            row_default_height: '170px'
+                            height: self.minimum_height
+
+
 
 
 <Pop@Popup>
@@ -85,7 +125,7 @@
             Button:
                 text: 'Закрыть'
                 on_press: root.dismiss()
-<PopChmot@Popup>
+<PopDstr@Popup>
     list:list
     GridLayout:
         rows:7
